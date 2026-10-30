@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      화면 배경 / 카드 / 결과 이미지를 모두 밝은 색으로 그리므로 테마도 Light 로 고정한다.
+      DayNight 를 쓰면 다크 모드 폰에서 글자만 흰색으로 바뀌어 밝은 배경 위에서 보이지 않는다.
+    -->
+    <style name="Theme.ScreenGolf" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/green</item>
+        <item name="colorPrimaryVariant">@color/green_deep</item>
+        <item name="colorOnPrimary">#FFFFFFFF</item>
+        <item name="colorSecondary">@color/amber</item>
+        <item name="colorSecondaryVariant">@color/amber_ink</item>
+        <item name="colorOnSecondary">#FF000000</item>
+        <item name="colorSurface">#FFFFFFFF</item>
+        <item name="colorOnSurface">@color/ink</item>
+        <item name="android:textColorPrimary">@color/ink</item>
+        <item name="android:textColorSecondary">@color/ink_soft</item>
+        <item name="android:statusBarColor">@color/green_deep</item>
+    </style>
+
+    <!-- 뒤로가기 화살표가 있는 하위 화면용 -->
+    <style name="Theme.ScreenGolf.Bar" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorPrimary">@color/green_deep</item>
+        <item name="colorPrimaryVariant">@color/green_deep</item>
+        <item name="colorOnPrimary">#FFFFFFFF</item>
+        <item name="colorSecondary">@color/amber</item>
+        <item name="colorSecondaryVariant">@color/amber_ink</item>
+        <item name="colorOnSecondary">#FF000000</item>
+        <item name="colorSurface">#FFFFFFFF</item>
+        <item name="colorOnSurface">@color/ink</item>
+        <item name="android:textColorPrimary">@color/ink</item>
+        <item name="android:textColorSecondary">@color/ink_soft</item>
+        <item name="android:statusBarColor">@color/green_deep</item>
+    </style>
+
+    <!--
+      회원 줄에 칩이 여러 개 들어가므로 폭을 줄인다.
+      체크 표시 아이콘은 빼되, 켜지면 초록으로 가득 차게 해서 켜짐/꺼짐이 한눈에 보인다.
+      (아이콘만 빼고 기본 배경색을 두면 옅은 회색 차이뿐이라 구분이 안 된다)
+    -->
+    <style name="ChipCompact" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="android:checkable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/chip_text</item>
+        <item name="chipBackgroundColor">@color/chip_bg</item>
+        <item name="chipStrokeColor">@color/chip_stroke</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipMinHeight">32dp</item>
+        <item name="chipStartPadding">8dp</item>
+        <item name="chipEndPadding">8dp</item>
+        <item name="textStartPadding">0dp</item>
+        <item name="textEndPadding">0dp</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="chipIconVisible">false</item>
+        <item name="closeIconVisible">false</item>
+        <item name="ensureMinTouchTargetSize">false</item>
+    </style>
+</resources>

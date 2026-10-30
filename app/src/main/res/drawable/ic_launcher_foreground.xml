@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- 그린(퍼팅 그린) -->
+    <path
+        android:fillColor="#3FA86A"
+        android:pathData="M30,74 m-16,0 a16,7 0 1,0 32,0 a16,7 0 1,0 -32,0" />
+    <!-- 홀 -->
+    <path
+        android:fillColor="#0A4B2A"
+        android:pathData="M30,74 m-5,0 a5,2.2 0 1,0 10,0 a5,2.2 0 1,0 -10,0" />
+    <!-- 깃대 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M28.6,32 L31.4,32 L31.4,74 L28.6,74 Z" />
+    <!-- 깃발 -->
+    <path
+        android:fillColor="#F3A712"
+        android:pathData="M31.4,32 L60,40 L31.4,48 Z" />
+    <!-- 공 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M70,70 m-8,0 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0" />
+</vector>

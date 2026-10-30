@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 테스트 빌드는 스토어 앱과 나란히 깔리므로 이름으로 구분한다. -->
+    <string name="app_name">ScreenGolf 테스트</string>
+</resources>

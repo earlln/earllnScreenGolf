@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:minHeight="48dp"
+    android:orientation="horizontal">
+
+    <!-- 칩이 밀려나지 않도록 이름이 먼저 줄어든다 -->
+    <CheckBox
+        android:id="@+id/chkPlaying"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/ink"
+        android:textSize="16sp" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chipSlow"
+        style="@style/ChipCompact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:text="@string/slow" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chipFood"
+        style="@style/ChipCompact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:text="" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chipGame"
+        style="@style/ChipCompact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:text="@string/game" />
+</LinearLayout>

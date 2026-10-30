@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="green">#157F45</color>
+    <color name="green_deep">#0A4B2A</color>
+    <color name="green_light">#3FA86A</color>
+    <color name="amber">#F3A712</color>
+    <color name="amber_ink">#9A5B00</color>
+    <color name="amber_bg">#FFF2D6</color>
+
+    <color name="ink">#12261B</color>
+    <color name="ink_soft">#4A5B51</color>
+    <color name="ink_faint">#7A8B80</color>
+    <color name="bg">#F4F8F4</color>
+    <color name="card">#FFFFFF</color>
+    <color name="field">#F1F5F2</color>
+    <color name="field_stroke">#D5E1D9</color>
+    <color name="danger">#C0392B</color>
+
+    <color name="ic_launcher_background">#0A4B2A</color>
+</resources>

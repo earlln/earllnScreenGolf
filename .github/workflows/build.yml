@@ -1,0 +1,81 @@
+name: Build
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      HAS_UPLOAD_KEY: ${{ secrets.UPLOAD_KEYSTORE_BASE64 != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.13'
+
+      - name: Unit test (조편성 로직)
+        run: gradle testDebugUnitTest --no-daemon --stacktrace
+
+      # 1) 폰에 바로 까는 테스트 APK. 실제 결제 대신 가짜 구매 창이 뜬다.
+      - name: Build test APK
+        run: gradle assembleDebug --no-daemon --stacktrace
+
+      - name: Read app version
+        id: ver
+        run: echo "name=$(grep -oP 'versionName\s+"\K[^"]+' app/build.gradle)" >> "$GITHUB_OUTPUT"
+
+      - name: Collect test APK
+        run: |
+          mkdir -p out
+          cp app/build/outputs/apk/debug/app-debug.apk out/EarllnScreenGolf-test.apk
+
+      # 2) Play 스토어용 AAB. 업로드 키(Secrets)가 있을 때만 만든다.
+      - name: Restore upload key
+        if: env.HAS_UPLOAD_KEY == 'true'
+        run: echo "${{ secrets.UPLOAD_KEYSTORE_BASE64 }}" | base64 -d > "$RUNNER_TEMP/upload.keystore"
+
+      - name: Build Play bundle (AAB)
+        if: env.HAS_UPLOAD_KEY == 'true'
+        env:
+          UPLOAD_KEYSTORE_FILE: ${{ runner.temp }}/upload.keystore
+          UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.UPLOAD_KEYSTORE_PASSWORD }}
+          UPLOAD_KEY_ALIAS: ${{ secrets.UPLOAD_KEY_ALIAS }}
+          UPLOAD_KEY_PASSWORD: ${{ secrets.UPLOAD_KEY_PASSWORD }}
+        run: |
+          gradle bundleRelease --no-daemon --stacktrace
+          cp app/build/outputs/bundle/release/app-release.aab out/EarllnScreenGolf.aab
+
+      - name: List outputs
+        run: ls -la out
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: EarllnScreenGolf
+          path: out/*
+
+      - name: Publish to Releases
+        if: github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: EarllnScreenGolf v${{ steps.ver.outputs.name }}
+          body: |
+            EarllnScreenGolf v${{ steps.ver.outputs.name }} (${{ github.sha }})
+
+            - EarllnScreenGolf-test.apk — 폰에 바로 까는 테스트 빌드. 결제는 가짜 구매 창으로 대신합니다.
+            - EarllnScreenGolf.aab — Play Console 에 올리는 파일 (업로드 키가 설정된 경우에만 있습니다).
+          files: out/*
